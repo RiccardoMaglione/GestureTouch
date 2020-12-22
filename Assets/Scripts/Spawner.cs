@@ -29,13 +29,13 @@ public class Spawner : MonoBehaviour
         {
             GameObject Go = Instantiate(SphereGo, new Vector3(transform.position.x, Random.Range(-8, 9), transform.position.z), Quaternion.Euler(0, 0, 90));
             Go.name = "GoRight";
-            Destroy(Go, 5);
+            Destroy(Go, 7);
         }
         if (this.gameObject.name == "SpawnLeft") //Left to Right
         {
             GameObject Go = Instantiate(SphereGo, new Vector3(transform.position.x, Random.Range(-8, 9), transform.position.z), Quaternion.Euler(0, 0, 270));
             Go.name = "GoLeft";
-            Destroy(Go, 5);
+            Destroy(Go, 7);
         }
     }
 }
