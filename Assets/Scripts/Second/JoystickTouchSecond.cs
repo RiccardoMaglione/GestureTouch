@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class JoystickTouchSecond : MonoBehaviour
 {
     public GameObject Player;
-    public Image ArrowRight;
-    public Image ArrowLeft;
+    public Image[] ArrowRight;
+    public Image[] ArrowLeft;
     public Vector2 startPos;
     public static Vector2 direction;
     public static Vector2 direction1;
@@ -38,12 +38,18 @@ public class JoystickTouchSecond : MonoBehaviour
                         direction1 = new Vector2(Mathf.RoundToInt(direction.x), 0);
                         if (direction1 == Vector2.left)
                         {
-                            ArrowLeft.color = Color.grey;
+                            for (int i = 0; i < ArrowLeft.Length; i++)
+                            {
+                                ArrowLeft[i].color = Color.grey;
+                            }
                             print("Left");
                         }
                         if (direction1 == Vector2.right)
                         {
-                            ArrowRight.color = Color.grey;
+                            for (int i = 0; i < ArrowRight.Length; i++)
+                            {
+                                ArrowRight[i].color = Color.grey;
+                            }
                             print("Right");
                         }
                         break;
@@ -53,14 +59,26 @@ public class JoystickTouchSecond : MonoBehaviour
                         Player.transform.Translate(Vector3.right * Speed * Time.deltaTime * direction.x);
                         if (direction1 == Vector2.left)
                         {
-                            ArrowLeft.color = Color.grey;
-                            ArrowRight.color = Color.white;
+                            for (int i = 0; i < ArrowLeft.Length; i++)
+                            {
+                                ArrowLeft[i].color = Color.grey;
+                            }
+                            for (int i = 0; i < ArrowRight.Length; i++)
+                            {
+                                ArrowRight[i].color = Color.white;
+                            }
                             print("Left");
                         }
                         if (direction1 == Vector2.right)
                         {
-                            ArrowRight.color = Color.grey;
-                            ArrowLeft.color = Color.white;
+                            for (int i = 0; i < ArrowRight.Length; i++)
+                            {
+                                ArrowRight[i].color = Color.grey;
+                            }
+                            for (int i = 0; i < ArrowLeft.Length; i++)
+                            {
+                                ArrowLeft[i].color = Color.white;
+                            }
                             print("Right");
                         }
                         break;
@@ -68,8 +86,14 @@ public class JoystickTouchSecond : MonoBehaviour
                         direction1 = Vector3.zero;
                         if (direction1 == Vector2.zero)
                         {
-                            ArrowLeft.color = Color.white;
-                            ArrowRight.color = Color.white;
+                            for (int i = 0; i < ArrowLeft.Length; i++)
+                            {
+                                ArrowLeft[i].color = Color.white;
+                            }
+                            for (int i = 0; i < ArrowRight.Length; i++)
+                            {
+                                ArrowRight[i].color = Color.white;
+                            }
                             print("Right");
                         }
                         break;
@@ -81,8 +105,14 @@ public class JoystickTouchSecond : MonoBehaviour
                 direction1 = Vector3.zero;
                 if (direction1 == Vector2.zero)
                 {
-                    ArrowLeft.color = Color.white;
-                    ArrowRight.color = Color.white;
+                    for (int i = 0; i < ArrowLeft.Length; i++)
+                    {
+                        ArrowLeft[i].color = Color.white;
+                    }
+                    for (int i = 0; i < ArrowRight.Length; i++)
+                    {
+                        ArrowRight[i].color = Color.white;
+                    }
                     print("Right");
                 }
             }
