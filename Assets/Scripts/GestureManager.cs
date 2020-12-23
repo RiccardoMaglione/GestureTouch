@@ -329,7 +329,7 @@ public class GestureManager : MonoBehaviour
     {
         if (CanSwipe == true)
         {
-            Info.InfoPanel.transform.position = new Vector2(Info.InfoPanel.transform.position.x - 650, Info.InfoPanel.transform.position.y);
+            Info.InfoPanel.transform.position = new Vector2(Info.EndPointRightStatic.transform.position.x, Info.InfoPanel.transform.position.y);
             LongTimer = 0;
             CanSwipe = false;
         }
@@ -338,7 +338,7 @@ public class GestureManager : MonoBehaviour
     {
         if (CanSwipe == false)
         {
-            Info.InfoPanel.transform.position = new Vector2(Info.InfoPanel.transform.position.x + 650, Info.InfoPanel.transform.position.y);
+            Info.InfoPanel.transform.position = new Vector2(Info.EndPointLeftStatic.transform.position.x, Info.InfoPanel.transform.position.y);
             LongTimer = 0;
             CanSwipe = true;
         }
