@@ -1,22 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class PlayerM2 : MonoBehaviour
+public class PlayerManager : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.name == "Hole")
-        {
-            SceneManager.LoadScene("GameOver");
-        }
-        if (other.name == "Flag")
-        {
-            SceneManager.LoadScene("GameOver");
-        }
-    }
-
     public static bool isGrounded = true;
     public bool isGroundInspector;
     public static Rigidbody rb;

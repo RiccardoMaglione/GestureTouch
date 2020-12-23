@@ -14,7 +14,6 @@ public class JoystickTouchSecond : MonoBehaviour
     public float Speed = 5;
     void Update()
     {
-
         // Track a single touch as a direction control.
         if (Input.touchCount > 0)
         {

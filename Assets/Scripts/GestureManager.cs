@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 public class GestureManager : MonoBehaviour
 {
     #region Variables
     #region Tap Variables
     int TouchCounter = 0;
+    int TouchCounter1 = 0;
     float Timer = 0;
     float WaitTime = 0.5f;
     bool isFinishDouble = false;
@@ -56,7 +56,7 @@ public class GestureManager : MonoBehaviour
         MethodRightSwipe = PanelInfoRight;
         MethodLeftSwipe = PanelInfoLeft;
 
-        MethodOneLongPress = BallForce;
+        //MethodOneLongPress = Method;
         //MethodTwoLongPress = Method;
     }
     #endregion
@@ -84,18 +84,18 @@ public class GestureManager : MonoBehaviour
             print(Timer);
             print(TouchCounter);
         }
-        if (scene.name == "Third")
-        {
-            Touch TouchDetect = Input.GetTouch(0);
-            if (TouchDetect.phase == TouchPhase.Began)
-            {
-                LongTimer = 0;
-                print(LongTimer);
-            }
-            print(LongTimer);
-            LongTimer += Time.deltaTime;
-            OneLongPressFingerInterrupt(MethodOneLongPress);
-        }
+        //if (scene.name == "Third")
+        //{
+        //    Touch TouchDetect = Input.GetTouch(0);
+        //    if (TouchDetect.phase == TouchPhase.Began)
+        //    {
+        //        LongTimer = 0;
+        //        print(LongTimer);
+        //    }
+        //    print(LongTimer);
+        //    LongTimer += Time.deltaTime;
+        //    OneLongPressFingerInterrupt(MethodOneLongPress);
+        //}
     }
 
 
@@ -136,34 +136,38 @@ public class GestureManager : MonoBehaviour
     #region Tap - Double and Triple
     void DoubleTap(DelegateTap MethodDoubleTap)
     {
-        if (Input.touchCount == 1)                                  //Rilevo il primo tocco
+        if (Input.touchCount >= 1)                                  //Rilevo il primo tocco
         {
             Touch Touch1 = Input.GetTouch(0);                       //Prendo il primo tocco per sfruttare la funzionalità delle fasi
-            if (Touch1.phase == TouchPhase.Began)                   //Il primo istante in cui tocco
+            if (Touch1.position.x > Screen.width / 2)
             {
-                TouchCounter = 1;                                   //Segno il contatore a 1 per indicare 1 tocco
-            }
-            if (Touch1.phase == TouchPhase.Ended)
-            {
-                isFinishDouble = true;
-                Timer = 0;
-            }
-        }
-        if (TouchCounter == 1)
-        {
+                if (Touch1.phase == TouchPhase.Began)                   //Il primo istante in cui tocco
+                {
+                    TouchCounter1 = 1;                                   //Segno il contatore a 1 per indicare 1 tocco
+                }
+                if (Touch1.phase == TouchPhase.Ended)
+                {
+                    isFinishDouble = true;
+                    Timer = 0;
+                }
+                if (TouchCounter1 == 1)
+                {
 
-            if (Timer <= WaitTime && Input.touchCount == 1 && isFinishDouble == true)
-            {
-                isFinishDouble = false;
-                Timer = 0;
-                TouchCounter = 0;
-                MethodDoubleTap();
-            }
-            else
-            {
-                isFinishDouble = false;
-                Timer = 0;
-                TouchCounter = 0;
+                    if (Timer <= WaitTime && Input.touchCount >= 1 && isFinishDouble == true)
+                    {
+                        isFinishDouble = false;
+                        Timer = 0;
+                        TouchCounter1 = 0;
+                        MethodDoubleTap();
+                        print("Ciao" + TouchCounter1);
+                    }
+                    else
+                    {
+                        isFinishDouble = false;
+                        Timer = 0;
+                        TouchCounter1 = 0;
+                    }
+                }
             }
         }
     }
@@ -243,18 +247,18 @@ public class GestureManager : MonoBehaviour
     //        }
     //    }
     //}
-    public void OneLongPressFingerInterrupt(DelegateLongPress MethodOneLongPress)
-    {
-        if (Input.touchCount == 1)
-        {
-            Touch Touch1 = Input.GetTouch(0);
-            LongTimer += Time.deltaTime;
-            if (Touch1.phase == TouchPhase.Ended)
-            {
-                MethodOneLongPress();
-            }
-        }
-    }
+    //public void OneLongPressFingerInterrupt(DelegateLongPress MethodOneLongPress)
+    //{
+    //    if (Input.touchCount == 1)
+    //    {
+    //        Touch Touch1 = Input.GetTouch(0);
+    //        LongTimer += Time.deltaTime;
+    //        if (Touch1.phase == TouchPhase.Ended)
+    //        {
+    //            MethodOneLongPress();
+    //        }
+    //    }
+    //}
     //public void TwoLongPressFinger(DelegateLongPress MethodTwoLongPress)
     //{
     //    if (Input.touchCount == 2)
@@ -315,16 +319,11 @@ public class GestureManager : MonoBehaviour
 
     public void Jump()
     {
-        if (PlayerM2.isGrounded == true)
+        if (PlayerManager.isGrounded == true)
         {
-            PlayerM2.rb.AddForce(Vector2.up * PlayerM2.jumpForce, ForceMode.Impulse);
-            PlayerM2.isGrounded = false;
+            PlayerManager.rb.AddForce(Vector2.up * PlayerManager.jumpForce, ForceMode.Impulse);
+            PlayerManager.isGrounded = false;
         }
-    }
-    public void BallForce()
-    {
-        Ball.rb.AddForce(Vector3.right * Ball.dashForce * LongTimer, ForceMode.Impulse);
-        LongTimer = 0;
     }
     public void PanelInfoLeft()
     {

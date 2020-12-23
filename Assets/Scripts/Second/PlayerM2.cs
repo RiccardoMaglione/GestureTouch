@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerM3 : MonoBehaviour
+public class PlayerM2 : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name == "Obstacle")
+        if(other.name == "Hole")
+        {
+            SceneManager.LoadScene("GameOver");
+        }
+        if (other.name == "Flag")
         {
             SceneManager.LoadScene("GameOver");
         }
