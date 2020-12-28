@@ -2,53 +2,56 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JoystickImage : MonoBehaviour
+namespace MaglioneFramework
 {
-    public Vector3 pos;
-    Vector3 InitialPosition;
-
-    void Start()
+    public class JoystickImage : MonoBehaviour
     {
-        InitialPosition = transform.position;
-        pos = transform.position;
-    }
+        public Vector3 pos;
+        Vector3 InitialPosition;
 
-    void Update()
-    {
-        #region Movimento Translate
-        transform.Translate(Vector3.up * 90 * Time.deltaTime * JoystickTouch.direction.y);
-        transform.Translate(Vector3.right * 90 * Time.deltaTime * JoystickTouch.direction.x);
-        #endregion
+        void Start()
+        {
+            InitialPosition = transform.position;
+            pos = transform.position;
+        }
 
-        #region Blocco movimento joystick
-        pos.x = Mathf.Clamp(transform.position.x, 0, 75);
-        pos.y = Mathf.Clamp(transform.position.y, 0, 75);
-        transform.position = pos;
-        #endregion
+        void Update()
+        {
+            #region Movimento Translate
+            transform.Translate(Vector3.up * 90 * Time.deltaTime * JoystickTouch.direction.y);
+            transform.Translate(Vector3.right * 90 * Time.deltaTime * JoystickTouch.direction.x);
+            #endregion
 
-        #region Controllo Uni-Direzionale
-        if (JoystickTouch.direction1 == Vector2.up && JoystickTouch.direction1 != Vector2.down && JoystickTouch.direction1 != Vector2.left && JoystickTouch.direction1 != Vector2.right)
-        {
-            transform.position = new Vector3(InitialPosition.x, 75, 0);
+            #region Blocco movimento joystick
+            pos.x = Mathf.Clamp(transform.position.x, 0, 75);
+            pos.y = Mathf.Clamp(transform.position.y, 0, 75);
+            transform.position = pos;
+            #endregion
+
+            #region Controllo Uni-Direzionale
+            if (JoystickTouch.direction1 == Vector2.up && JoystickTouch.direction1 != Vector2.down && JoystickTouch.direction1 != Vector2.left && JoystickTouch.direction1 != Vector2.right)
+            {
+                transform.position = new Vector3(InitialPosition.x, 75, 0);
+            }
+            if (JoystickTouch.direction1 != Vector2.up && JoystickTouch.direction1 == Vector2.down && JoystickTouch.direction1 != Vector2.left && JoystickTouch.direction1 != Vector2.right)
+            {
+                transform.position = new Vector3(InitialPosition.x, 0, 0);
+            }
+            if (JoystickTouch.direction1 != Vector2.up && JoystickTouch.direction1 != Vector2.down && JoystickTouch.direction1 == Vector2.left && JoystickTouch.direction1 != Vector2.right)
+            {
+                transform.position = new Vector3(0, InitialPosition.y, 0);
+            }
+            if (JoystickTouch.direction1 != Vector2.up && JoystickTouch.direction1 != Vector2.down && JoystickTouch.direction1 != Vector2.left && JoystickTouch.direction1 == Vector2.right)
+            {
+                transform.position = new Vector3(75, InitialPosition.y, 0);
+            }
+            #endregion
+            #region Nessuna direzione
+            if (JoystickTouch.direction1 == Vector2.zero)
+            {
+                transform.position = InitialPosition;
+            }
+            #endregion
         }
-        if (JoystickTouch.direction1 != Vector2.up && JoystickTouch.direction1 == Vector2.down && JoystickTouch.direction1 != Vector2.left && JoystickTouch.direction1 != Vector2.right)
-        {
-            transform.position = new Vector3(InitialPosition.x, 0, 0);
-        }
-        if (JoystickTouch.direction1 != Vector2.up && JoystickTouch.direction1 != Vector2.down && JoystickTouch.direction1 == Vector2.left && JoystickTouch.direction1 != Vector2.right)
-        {
-            transform.position = new Vector3(0, InitialPosition.y, 0);
-        }
-        if (JoystickTouch.direction1 != Vector2.up && JoystickTouch.direction1 != Vector2.down && JoystickTouch.direction1 != Vector2.left && JoystickTouch.direction1 == Vector2.right)
-        {
-            transform.position = new Vector3(75, InitialPosition.y, 0);
-        }
-        #endregion
-        #region Nessuna direzione
-        if (JoystickTouch.direction1 == Vector2.zero)
-        {
-            transform.position = InitialPosition;
-        }
-        #endregion
     }
 }

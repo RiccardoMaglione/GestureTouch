@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerM2 : MonoBehaviour
+namespace MaglioneFramework
 {
-    private void OnTriggerEnter(Collider other)
+    public class PlayerM2 : MonoBehaviour
     {
-        if(other.name == "Hole")
+        private void OnTriggerEnter(Collider other)
         {
-            SceneManager.LoadScene("GameOver");
-        }
-        if (other.name == "Flag")
-        {
-            SceneManager.LoadScene("GameOver");
+            if (other.name == "Hole")
+            {
+                SceneManager.LoadScene("GameOver");
+            }
+            if (other.name == "Flag")
+            {
+                SceneManager.LoadScene("Winning");
+            }
         }
     }
 }

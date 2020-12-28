@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-public class PlayerM1 : MonoBehaviour
+namespace MaglioneFramework
 {
-    private void OnTriggerEnter(Collider other)
+    public class PlayerM1 : MonoBehaviour
     {
-        SceneManager.LoadScene("GameOver");
+        private void OnTriggerEnter(Collider other)
+        {
+            SceneManager.LoadScene("GameOver");
+        }
     }
 }
